@@ -32,6 +32,7 @@ module.exports = {
   },
 }
 } else {
+  //else is for the production environment
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
   })

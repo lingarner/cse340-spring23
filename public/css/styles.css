@@ -180,6 +180,7 @@ h2, h3{
 
    li :nth-child(1){
     color: red;
+    text-decoration: none;
   }
 
   #ownToday{
