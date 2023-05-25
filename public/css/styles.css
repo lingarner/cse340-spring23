@@ -142,6 +142,35 @@ li :nth-child(1){
   text-decoration: none;
 }
 
+#inv-display{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  align-items: center;
+  text-align: center;
+  
+}
+#inv-display li{
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 60%;
+  background-color: tan;
+  box-shadow: 7px 7px 15px black;
+}
+
+#inv-display li img{
+  border-radius: 20px;
+  width: 90%;
+  border: 2px solid black;
+}
+
+#centered{
+  text-align: center;
+  font-family: 'Fira Sans', sans-serif;
+}
 
 
 
@@ -184,10 +213,7 @@ li :nth-child(1){
     font-size: 20px;
   }
 
-   li :nth-child(1){
-    color: red;
-    text-decoration: none;
-  }
+ 
 
   #ownToday{
     padding: 7px 60px 7px 63px;
@@ -241,5 +267,6 @@ header{
   margin: auto 0;
 
 }
+
 
 }
