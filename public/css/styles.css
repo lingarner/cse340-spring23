@@ -167,7 +167,7 @@ li :nth-child(1){
   border: 2px solid black;
 }
 
-#centered{
+.centered{
   text-align: center;
   font-family: 'Fira Sans', sans-serif;
 }
