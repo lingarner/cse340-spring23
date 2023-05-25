@@ -22,7 +22,7 @@ app.use(expressLayouts) //tells app to usse expresss-ejs-layout-package stored i
 app.set("layout", "./layouts/layout") // not at views root
 //when express ejs looks for basic template view it will be found in th layouts folder
 
-// Index route
+// Index route- builds nav
 app.get("/", baseController.buildHome)
 
 
@@ -30,6 +30,11 @@ app.get("/", baseController.buildHome)
  * Routes
  *************************/
 app.use(require("./routes/static"))
+
+// Inventory routes- builds nav links
+// any links with /inv will go to inventoryRoute.js to
+// find the rest of the link
+app.use("/inv", require("./routes/inventoryRoute"))
 
 /* ***********************
  * Local Server Informationw
