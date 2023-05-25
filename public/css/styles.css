@@ -137,6 +137,12 @@ h2, h3{
   display: none;
 }
 
+li :nth-child(1){
+  color: red;
+  text-decoration: none;
+}
+
+
 
 
 @media screen and (min-width: 800px) {
