@@ -1,0 +1,238 @@
+/******* Change Box Model ***************/
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap');
+/* headers- font-family: 'Fira Sans', sans-serif; */
+/* paragraphs-  font-family: 'Hind', sans-serif;*/
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body{
+  padding: 6px;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.homelink, .accountLink a{
+  text-decoration: none;
+  color: black;
+}
+
+.homelink{
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 30px;
+}
+
+.accountLink{
+  font-family: 'Hind', sans-serif;
+}
+
+.headLinks{
+  font-family: 'Hind', sans-serif;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  padding-left: 0px;
+  color: white;
+  font-size: 16px;
+  
+}
+
+nav{
+  background-color: black;
+  padding: 0.2px;
+}
+
+h2, h3{
+  font-family: 'Fira Sans', sans-serif;
+}
+
+#headerFeature{
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 1.17em;
+  padding-bottom: 2px; 
+}
+.heroImage{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.deloreanImage{
+  z-index: 1;
+  display: inline;
+  grid-column: 2/4;
+  grid-row: 1;
+  margin: auto 0;
+  width: 300px;
+  height: 153px;
+}
+
+
+.featureList {
+  z-index: 3;
+  grid-row: 1;
+  list-style-type: none;
+  padding-left: 0px;
+  display: inline;
+  grid-column: 1/3;
+  /* height: 200px; */
+  background-color: #FAF9F6;
+  opacity: 0.8;
+  width: fit-content;
+}
+
+.featureList li{
+  font-family: 'Hind', sans-serif;
+  padding: 0px;
+  color: #01869E;
+}
+
+#ownToday{
+  color: black;
+  font-weight: bold;
+  background-color: #01869E;
+  text-align: center;
+  width: fit-content;
+  padding: 5px;
+}
+
+.deloreanReviewsTitle{
+  margin: 0px;
+}
+
+.deloreanReviews{
+  margin: 8px;
+  padding: 6px;
+  line-height: 25px;
+}
+
+.upgrades{
+  display: flex;
+  flex-wrap: wrap;
+}
+.upgradeCards{
+  width: 137px; 
+  height: 137px;
+  background-color: #01869E;
+  border:1px solid black;
+  padding: 20px;
+  margin: 10px;
+}
+
+
+.block{
+  display: block;
+  text-align: center;
+}
+
+.deloreanImage-lg{
+  display: none;
+}
+
+
+
+@media screen and (min-width: 800px) {
+  .deloreanImage{
+    display: none;
+  }
+  .deloreanImage-lg{
+    display:block;
+    grid-column: 3;
+    grid-row: 1;
+  }
+  
+  html{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-image: url("https://github.com/lingarner/cse340/blob/main/public/images/checkered.jpeg?raw=true");
+  }
+  
+  body{
+    grid-column: 2/5;
+    border: 4px solid #01869E;
+    border-radius: 9px;
+    background-color: white;
+  }
+  
+  .heroImage{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-rows: 1fr;
+  }
+  
+  .featureList {
+    z-index: 3;
+    grid-row: 1;
+    display: inline;
+    grid-column: 2/4;
+    grid-row: 1;
+    font-size: 20px;
+  }
+
+   li :nth-child(1){
+    color: red;
+  }
+
+  #ownToday{
+    padding: 7px 60px 7px 63px;
+    margin-top: 20px;
+    font-size: 15px;
+  }
+
+  #headerFeature{
+    letter-spacing: 5px;
+  }
+
+  .welcome{
+    font-size: 30px;
+  }
+
+  .siteName{
+    font-size: 40px;
+  }
+
+.upgrades-reviews{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 70px 1fr;
+}
+
+.reviewsSection{
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.deloreanReviews{
+  line-height: 40px;
+}
+
+.upgrades{
+  grid-column: 1;
+  grid-row: 2;
+}
+header{
+  margin-top: 20px;
+}
+.deloreanReviewsTitle{
+  grid-column: 2;
+  grid-row: 1;
+  margin: auto 0;
+  
+}
+.edloreanUpdatesTitle{
+  grid-row: 1;
+  grid-column: 1;
+  margin: auto 0;
+
+}
+
+}
