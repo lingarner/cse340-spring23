@@ -24,7 +24,7 @@ app.set("layout", "./layouts/layout") // not at views root
 //when express ejs looks for basic template view it will be found in th layouts folder
 
 // Index route- builds nav
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 
 /* ***********************
@@ -48,13 +48,13 @@ app.use(async (req, res, next) => {
 * Place after all other middleware
 *************************/
 
-
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
-    message: err.message,
+    message,
     nav
   })
 })
