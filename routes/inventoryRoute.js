@@ -20,6 +20,9 @@ router.get("/type/:classificationId", utilities.handleErrors((invController.buil
 // Route to build car details view
 router.get("/detail/:invId", utilities.handleErrors((invController.buildByInvId)));
 
+// Route for error Message
+router.get("/broken", utilities.handleErrors(invController.throwError));
+
 
 
 module.exports = router;
