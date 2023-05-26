@@ -268,5 +268,14 @@ header{
 
 }
 
+/* #inv-display{
+  display: grid;
+  grid-template-columns: auto;
+}
+
+#inv-display li{
+  width: fit-content;
+} */
+
 
 }

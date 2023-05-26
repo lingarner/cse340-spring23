@@ -11,8 +11,12 @@ const invController = require("../controllers/invController")
 
 
 // Route to build inventory by classification view
-//this route must match the routes in the links for the nav bar 
+// this route must match the routes in the links for the nav bar 
 // /inv accounted for in server.js route to here
 router.get("/type/:classificationId", invController.buildByClassificationId);
+
+
+// Route to build car details view
+router.get("/detail/:invId", invController.buildByInvId);
 
 module.exports = router;

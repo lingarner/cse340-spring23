@@ -1,0 +1,11 @@
+<!-- content heading -->
+<% if (title) { %>
+    <h1 id="centered"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<%# messages() %>
+
+<!-- Inventory Items Display -->
+<%- grid %>

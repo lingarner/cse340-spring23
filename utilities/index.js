@@ -64,6 +64,25 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the details view HTML
+* ************************************ */
+Util.buildInvDetails = async function(data){
+  let detailsContainer
+  detailsContainer = '<div id="gridDetails">'
+  detailsContainer += `<img src = ${data[0].inv_image}>
+  <div>
+    <h2> ${data[0].inv_make}  ${data[0].inv_model} Details </h2>
+    <p> Price: $${data[0].inv_price} </p>
+    <p> Description: ${data[0].inv_description} </p> 
+    <p> Miles: ${data[0].inv_miles} miles</p> 
+    <p> Color: ${data[0].inv_color} </p> 
+    
+  </div>`
+return detailsContainer
+}
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
