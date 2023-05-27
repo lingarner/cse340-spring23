@@ -46,7 +46,6 @@ Util.buildClassificationGrid = async function(data){
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
-      grid += '<hr />'
       grid += '<h2>'
       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -70,15 +69,16 @@ Util.buildClassificationGrid = async function(data){
 Util.buildInvDetails = async function(data){
   let detailsContainer
   detailsContainer = '<div id="gridDetails">'
-  detailsContainer += `<img src = ${data[0].inv_image}>
+  detailsContainer += `<img src = ${data[0].inv_image} alt="picture of a ${data[0].inv_model}">
   <div>
     <h2> ${data[0].inv_make}  ${data[0].inv_model} Details </h2>
-    <p> Price: $${data[0].inv_price} </p>
+    <p> Price: $${new Intl.NumberFormat('en-US').format(data[0].inv_price)} </p>
     <p> Description: ${data[0].inv_description} </p> 
-    <p> Miles: ${data[0].inv_miles} miles</p> 
+    <p> Miles: ${new Intl.NumberFormat('en-US').format(data[0].inv_miles)}</p> 
     <p> Color: ${data[0].inv_color} </p> 
     
   </div>`
+  detailsContainer += '</div>'
 return detailsContainer
 }
 
