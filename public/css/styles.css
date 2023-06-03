@@ -197,7 +197,7 @@ li :nth-child(1){
 }
 
 /* style for flash messages */
-.notice{
+.notice, .success{
   list-style: none;
   color: white;
   font-size: 20px;
@@ -207,6 +207,10 @@ li :nth-child(1){
   border-radius: 10px;
   padding: 7px;
   margin: 10px auto;
+}
+
+.success{
+  background-color: greenyellow;
 }
 
 form{
@@ -255,6 +259,10 @@ form input{
   margin: 0px 0px 25px 0px;
 }
 
+.required:after {
+  content:" *";
+  color: white;
+}
 
 
 

@@ -17,4 +17,8 @@ accRouter.get("/login", utilities.handleErrors((accountController.buildLogin)))
 // registration route
 accRouter.get("/register", utilities.handleErrors((accountController.buildRegistration)))
 
+//registeration information path to database/model
+accRouter.post('/registerUser', utilities.handleErrors(accountController.registerAccount))
+
+
 module.exports = accRouter;

@@ -13,6 +13,7 @@ const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
+const bodyParser = require("body-parser")
 
 /* ***********************
  * Middleware
@@ -39,8 +40,12 @@ app.use(function(req, res, next){
   // creates a local variable called messages in the res.locals object to 
   // store flash messages
   res.locals.messages = require('express-messages')(req, res)
-  next() //allows messages to be passede to the next process and allows messages to be displayed in the view
+  next() //allows messages to be passed to the next process and allows messages to be displayed in the view
 })
+
+
+app.use(bodyParser.json()) //use body parser when working with JSON
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded (info in url or form)
 
 
 /* ***********************
@@ -73,7 +78,7 @@ app.use("/inv", require("./routes/inventoryRoute"))
 //access login page information
 app.use("/account", require("./routes/accountRoute"))
 
-
+//route to direct to loginRoute.js to
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
