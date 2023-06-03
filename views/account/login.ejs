@@ -1,0 +1,23 @@
+<!-- content heading -->
+<% if (title) { %>
+    <h1 id="centered"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<!-- will display a flash message if one is sent from controller -->
+<%- messages() %>
+
+<!-- basic login form -->
+<form action="">
+    <div id="center-form-content">
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="account_email"><br>
+        <label for="passsword">Password:</label><br>
+        <input type="text" id="passsword" name="account_password"><br><br>
+        <input id="submit" type="submit" value="Login">
+        <p id="sign-up"> No account? 
+            <a href="#">Sign-up</a>
+        </p>
+    </div>
+</form> 

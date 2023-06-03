@@ -11,6 +11,36 @@ const env = require("dotenv").config()
 const app = express()
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
+const session = require("express-session")
+const pool = require('./database/')
+
+/* ***********************
+ * Middleware
+ * ************************/
+
+// creating a session table in our DB 
+app.use(session({
+  //store = where the session data will be stored
+  // creating a new session table in our DB using a package
+  store: new(require('connect-pg-simple')(session))({
+    createTableIfMissing: true, //create the tabel if it does not exist
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET, //name value pair used to protect the session
+  resave: true,
+  saveUninitialized: true, //provides the browser with session cookie and saves it in its memory
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+  //this is where we add .flash() to the request object used in baseController
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  // creates a local variable called messages in the res.locals object to 
+  // store flash messages
+  res.locals.messages = require('express-messages')(req, res)
+  next() //allows messages to be passede to the next process and allows messages to be displayed in the view
+})
 
 
 /* ***********************
@@ -27,15 +57,22 @@ app.set("layout", "./layouts/layout") // not at views root
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
 
+
+
 /* ***********************
- * Routes
- *************************/
+* Routes
+*************************/
 app.use(require("./routes/static"))
 
 // Inventory routes- builds nav links
 // any links with /inv will go to inventoryRoute.js to
 // find the rest of the link
 app.use("/inv", require("./routes/inventoryRoute"))
+
+//route to direct to accountRoute.js to 
+//access login page information
+app.use("/account", require("./routes/accountRoute"))
+
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

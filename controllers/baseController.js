@@ -9,6 +9,12 @@ const baseController = {}
 baseController.buildHome = async function(req, res){
     //getNav is a function imported from utilities index.js
     const nav = await utilities.getNav()
+
+    //using ejs to display the flash message 
+    //uses a flash package to assigne the message to the req object
+    //uses 2 params "type (of message)", "message (must be a string)" 
+    req.flash("notice", "This is a flash message.")
+
     //using ejs to render the new html from nav in the view
     res.render("index", {title: "Home", nav})
 }
