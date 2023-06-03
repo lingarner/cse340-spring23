@@ -206,6 +206,7 @@ li :nth-child(1){
   width: fit-content;
   border-radius: 10px;
   padding: 7px;
+  margin: 10px auto;
 }
 
 form{
@@ -228,7 +229,7 @@ label{
   font-family: 'Hind', sans-serif;
 }
 
-#submit{
+#submit, #register{
   display: block;
   width: 40%;
   border-radius: 20px;
@@ -245,6 +246,13 @@ form input{
 
 #sign-up{
   text-align: center;
+}
+
+
+#password-description{
+  font-size: 12px;
+  text-align: center;
+  margin: 0px 0px 25px 0px;
 }
 
 

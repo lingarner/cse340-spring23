@@ -14,5 +14,7 @@ const accountController = require("../controllers/accountController");
 // /inv accounted for in server.js route to here
 accRouter.get("/login", utilities.handleErrors((accountController.buildLogin)))
 
+// registration route
+accRouter.get("/register", utilities.handleErrors((accountController.buildRegistration)))
 
 module.exports = accRouter;
