@@ -211,6 +211,7 @@ li :nth-child(1){
 
 .success{
   background-color: greenyellow;
+  color: black;
 }
 
 form{
@@ -263,6 +264,14 @@ form input{
   content:" *";
   color: white;
 }
+
+input:required:invalid, input:focus:invalid {
+  border: 2px solid red;
+ }
+
+ input:required:valid {
+  border: 2px solid greenyellow;
+ }
 
 
 

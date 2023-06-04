@@ -8,18 +8,19 @@
 <%- messages() %>
 
   <form action="/account/registerUser" method="post"> 
+    <p>All inputs are required.</p>
     <div id="center-form-content">
         <label class="required" for="fname">First Name:</label><br>
-        <input type="text" id="fname" name="account_firstname" required><br><br>
+        <input type="text" id="fname" name="account_firstname" placeholder="First Name" required><br><br>
 
         <label class="required" for="lname">Last Name:</label><br>
-        <input type="text" id="lname" name="account_lastname" required><br><br>
+        <input type="text" id="lname" name="account_lastname" placeholder="Last Name" required><br><br>
 
         <label class="required" for="email">Email:</label><br>
-        <input type="email" id="email" name="account_email" required><br><br>
+        <input type="email" id="email" name="account_email" placeholder="Email Address" required><br><br>
 
         <label class="required" for="password">Password:</label><br>
-        <input type="password" id="password" name="account_password" required><br><br>
+        <input type="password" id="password" name="account_password" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br><br>
         <p id="password-description">
             The password must be:<br>
             12 characters in length, minimum<br>
