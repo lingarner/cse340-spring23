@@ -1,6 +1,7 @@
 // Needed Resources 
 const express = require("express")
 const utilities = require("../utilities/")
+const regValidate = require('../utilities/account-validation')
 
 //creates a new Router object 
 const accRouter = new express.Router() 
@@ -18,7 +19,19 @@ accRouter.get("/login", utilities.handleErrors((accountController.buildLogin)))
 accRouter.get("/register", utilities.handleErrors((accountController.buildRegistration)))
 
 //registeration information path to database/model
-accRouter.post('/registerUser', utilities.handleErrors(accountController.registerAccount))
+accRouter.post('/registerUser', 
+    regValidate.registationRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(accountController.registerAccount)
+)
 
+
+// Process the login attempt
+accRouter.post(
+    "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    // utilities.handleErrors(accountController.registerLogin),
+    )
 
 module.exports = accRouter;

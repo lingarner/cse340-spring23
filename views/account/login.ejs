@@ -5,11 +5,22 @@
         res.redirect('/')
     } %>
 
+
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+<% } %>
+
 <!-- will display a flash message if one is sent from controller -->
 <%- messages() %>
 
+
 <!-- basic login form -->
-<form>
+<form id="loginForm" action="/account/login" method="post">
     <div id="center-form-content">
         <label class="required" for="email">Email:</label><br>
         <input type="email" id="email" name="account_email"  placeholder="Email Address" required><br>
