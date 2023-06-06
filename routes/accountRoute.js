@@ -31,7 +31,7 @@ accRouter.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
-    // utilities.handleErrors(accountController.registerLogin),
+    utilities.handleErrors(accountController.registerLogin),
     )
 
 module.exports = accRouter;

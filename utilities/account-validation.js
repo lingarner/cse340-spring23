@@ -55,6 +55,7 @@ validate.registationRules = () => {
  * Check data and return errors or continue to registration -- VALIDATE
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
+    console.log("validate, checkregdata")
     const { account_firstname, account_lastname, account_email } = req.body
     let errors = []
     errors = validationResult(req)
@@ -103,7 +104,6 @@ validate.checkRegData = async (req, res, next) => {
  * Check data and return errors or continue to registration -- VALIDATE
  * ***************************** */
 validate.checkLoginData = async (req, res, next) => {
-  console.log('checked login data')
   const { account_email, account_password } = req.body
   let errors = []
   errors = validationResult(req)
