@@ -10,6 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const baseController = require("./controllers/baseController")
+const invController = require("./controllers/invController")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
@@ -60,6 +61,10 @@ app.set("layout", "./layouts/layout") // not at views root
 
 // Index route- builds nav
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
+// // build inv
+// app.get("/inv", utilities.handleErrors(invContrroler.buildLayout))
+
 
 
 

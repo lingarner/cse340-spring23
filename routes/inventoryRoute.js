@@ -20,6 +20,15 @@ router.get("/type/:classificationId", utilities.handleErrors((invController.buil
 // Route to build car details view
 router.get("/detail/:invId", utilities.handleErrors((invController.buildByInvId)));
 
+// Route to build new classification form
+router.get("/newClass", utilities.handleErrors((invController.buildNewClassification)));
+
+// Route to add new vehicle
+router.get("/newInv", utilities.handleErrors((invController.addNewVehicle)));
+
+// render home management view
+router.get("/", utilities.handleErrors((invController.buildInvNav)));
+
 // Route for error Message
 router.get("/broken", utilities.handleErrors(invController.throwError));
 
