@@ -19,8 +19,7 @@
     <p>All inputs are required.</p>
     <div id="center-form-content">
         <label class="required" for="classification_name">Classification Name:</label><br>
-        <p>Name must be alphabetic characters only.</p><br>
-        <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required><br>
+        <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" minlength="1" placeholder="Alphabetic characters only." required><br>
 
         <input type="submit" value="Add Classification" id="register">
     </div>

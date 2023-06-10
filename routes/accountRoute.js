@@ -3,6 +3,7 @@ const express = require("express")
 const utilities = require("../utilities/")
 const regValidate = require('../utilities/account-validation')
 
+
 //creates a new Router object 
 const accRouter = new express.Router() 
 
@@ -32,6 +33,6 @@ accRouter.post(
     regValidate.loginRules(),
     regValidate.checkLoginData,
     utilities.handleErrors(accountController.registerLogin),
-    )
+)
 
 module.exports = accRouter;

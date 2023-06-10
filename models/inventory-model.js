@@ -40,10 +40,34 @@ async function getInventoryByInvId(inv_id) {
   } catch (error) {
     console.error("getinventorybyinvid error " + error)
   }
+};
+
+
+async function registerClass(classification_name){
+  try {
+    const sql = "INSERT INTO classification (classification_name)" + 
+    "VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
+  } catch (error) {
+    return error.message
+  }
+} 
+
+// * **********************
+//  *   Check for existing Class
+//  * ********************* */
+async function checkExistingClass(classification_name){
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const className = await pool.query(sql, [classification_name])
+    return className.rowCount
+  } catch (error) {
+    return error.message
+  }
 }
 
 //allows the function to be used elsewhere in the code
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, registerClass, checkExistingClass};
 
 
 

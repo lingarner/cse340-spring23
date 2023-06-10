@@ -1,6 +1,7 @@
 // Needed Resources 
 const express = require("express")
 const utilities = require("../utilities/")
+const regValidateInv = require('../utilities/inv-validation')
 
 //creates a new Router object 
 //we also have routes in the server.js file
@@ -32,6 +33,17 @@ router.get("/", utilities.handleErrors((invController.buildInvNav)));
 // Route for error Message
 router.get("/broken", utilities.handleErrors(invController.throwError));
 
+
+/* ******************************
+* POST methods
+* ***************************** */
+
+// send user entered classification to the database
+router.post("/newClass", 
+    regValidateInv.ClassRules(),
+    regValidateInv.checkClassData,
+    utilities.handleErrors((invController.registerClass))
+);
 
 
 module.exports = router;

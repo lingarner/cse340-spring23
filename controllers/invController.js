@@ -71,4 +71,38 @@ invCont.addNewVehicle = async function(req, res, next){
   })
 }
 
+
+invCont.registerClass = async function(req, res){
+  
+  // whatever information in recieved from the req body
+  // will be put into this const variable 
+  const {classification_name}  = req.body
+  // console.log(classification_name)
+  
+  const regResult = await invModel.registerClass(classification_name)
+
+  
+  if (regResult) {
+    let nav = await utilities.getNav()
+    let successMsg = req.flash(
+      "success",
+      `Congratulations, ${classification_name} has been added`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Login",
+      successMsg,
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the add progess failed.")
+    res.status(501).render("inventory/add-classification", {
+      title: "Add New Classificatioin",
+      nav,
+      errors,
+    })
+  }
+  
+}
+
 module.exports = invCont
