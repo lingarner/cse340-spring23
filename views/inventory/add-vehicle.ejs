@@ -1,0 +1,54 @@
+<!-- content heading -->
+<% if (title) { %>
+    <h1 id="centered"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<%- messages() %>
+
+<form action="/inv/newInv" method="post"> 
+    <p>All inputs are required.</p>
+    <div id="center-form-content">
+        <label class="required" for="classification_name">Classification</label><br>
+        <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required value="<%= locals.classification_name %>"><br>
+
+        <label class="required" for="inv_make">Make</label><br>
+        <input type="text" id="inv_make" name="inv_make" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_make%>"><br>
+
+        <label class="required" for="inv_model">Model</label><br>
+        <input type="text" id="classification_name" name="inv_model" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_model%>"><br>
+
+        <label class="required" for="inv_description">Description</label>
+        <textarea type="text" id="classification_name" name="inv_description" required value="<%= locals.inv_description%>"></textarea><br>
+
+        <label class="required" for="inv_image">Image Path</label><br>
+        <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-image.png" required value="<%= locals.inv_image%>"><br>
+
+        <label class="required" for="inv_thumbnail">Thumbnail Path</label><br>
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required value="<%= locals.inv_thumbnail%>"><br>
+
+        <label class="required" for="inv_price">Price</label><br>
+        <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price%>"><br>
+
+        <label class="required" for="inv_year">Year</label><br>
+        <input type="number" id="inv_year" name="inv_year" minlength="4" maxlength="4" required value="<%= locals.inv_year%>"><br>
+
+        <label class="required" for="inv_miles">Miles</label><br>
+        <input type="year" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles%>"><br>
+
+        <label class="required" for="inv_color">Color</label><br>
+        <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color%>"><br>
+
+        <input type="submit" value="Add Vehicle" id="register">
+    </div>
+</form>
+
