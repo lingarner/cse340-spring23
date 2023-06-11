@@ -25,7 +25,7 @@ router.get("/detail/:invId", utilities.handleErrors((invController.buildByInvId)
 router.get("/newClass", utilities.handleErrors((invController.buildNewClassification)));
 
 // Route to add new vehicle
-router.get("/newInv", utilities.handleErrors((invController.addNewVehicle)));
+router.get("/newInv", utilities.handleErrors((invController.renderNewVehicle)));
 
 // render home management view
 router.get("/", utilities.handleErrors((invController.buildInvNav)));
@@ -44,6 +44,9 @@ router.post("/newClass",
     regValidateInv.checkClassData,
     utilities.handleErrors((invController.registerClass))
 );
+
+// send new vehicle to the database
+router.post("/newInv", utilities.handleErrors((invController.registerNewVehicle)))
 
 
 module.exports = router;

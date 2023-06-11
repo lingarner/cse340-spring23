@@ -22,7 +22,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByInvId = async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInventoryByInvId(inv_id)
-  console.log(data)
   const grid = await utilities.buildInvDetails(data)
   let nav = await utilities.getNav()
   const carMake = data[0].inv_make
@@ -62,11 +61,18 @@ invCont.buildNewClassification = async function(req, res, next){
 }
 
 // add a new vehicle
-invCont.addNewVehicle = async function(req, res, next){
+invCont.renderNewVehicle = async function(req, res, next){
   let nav = await utilities.getNav()
+
+  const classificationTable = await invModel.getClassifications()
+  
+  let dropdown = await utilities.classDropdown(classificationTable.rows)
+    
+
   res.render("./inventory/add-vehicle", {
     title: "Add New Vehicle",
     nav,
+    dropdown,
     errors: null
   })
 }
@@ -77,10 +83,8 @@ invCont.registerClass = async function(req, res){
   // whatever information in recieved from the req body
   // will be put into this const variable 
   const {classification_name}  = req.body
-  // console.log(classification_name)
   
   const regResult = await invModel.registerClass(classification_name)
-
   
   if (regResult) {
     let nav = await utilities.getNav()
@@ -89,7 +93,7 @@ invCont.registerClass = async function(req, res){
       `Congratulations, ${classification_name} has been added`
     )
     res.status(201).render("inventory/management", {
-      title: "Login",
+      title: "Vehicle Management",
       successMsg,
       nav,
       errors: null,
@@ -103,6 +107,64 @@ invCont.registerClass = async function(req, res){
     })
   }
   
+}
+
+invCont.registerNewVehicle = async function(req, res){
+  let nav = await utilities.getNav()
+
+  const classificationTable = await invModel.getClassifications()
+  
+  let dropdown = await utilities.classDropdown(classificationTable.rows)
+  const {
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  }  = req.body
+
+  console.log(classification_id)
+
+  const regResult = await invModel.registerVehicle(
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
+
+  console.log(regResult)
+
+  if (regResult) {
+    req.flash(
+      "success",
+      `Congratulations, you\'ve registered ${inv_make} ${inv_model}!`
+    )
+    res.status(201).render("./inventory/add-vehicle", {
+      title: "Add New Vehicle",
+      nav,
+      dropdown,
+      errors: null
+    })
+  } else {
+    req.flash("notice", "Sorry, the registration failed.")
+    res.status(501).render("/inventory/add-vehicle", {
+      title: "Registration",
+      nav,
+      dropdown,
+      errors: null,
+    })
+  }
 }
 
 module.exports = invCont

@@ -23,7 +23,7 @@
 <form id="loginForm" action="/account/login" method="post">
     <div id="center-form-content">
         <label class="required" for="email">Email:</label><br>
-        <input type="email" id="email" name="account_email"  placeholder="Email Address" required><br>
+        <input type="email" id="email" name="account_email"  placeholder="Email Address" value="<%= locals.account_email%>" required><br>
         <label class="required" for="passsword">Password:</label><br>
         <input type="text" id="passsword" name="account_password" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br><br>
         <input id="submit" type="submit" value="Login">

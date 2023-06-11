@@ -18,8 +18,9 @@
 <form action="/inv/newInv" method="post"> 
     <p>All inputs are required.</p>
     <div id="center-form-content">
-        <label class="required" for="classification_name">Classification</label><br>
-        <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required value="<%= locals.classification_name %>"><br>
+        <label class="required" for="classification_id">Classification</label><br>
+        <%- dropdown %> <br>
+        <!-- <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required value=""><br> -->
 
         <label class="required" for="inv_make">Make</label><br>
         <input type="text" id="inv_make" name="inv_make" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_make%>"><br>
