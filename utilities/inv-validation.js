@@ -57,42 +57,36 @@ validate.newInvRules = () => {
     body("inv_make")
     .trim() //removes whitespace on either side of incoming string
     .isLength({ min: 3 })
-    .notEmpty()
     .withMessage("Please provide a valid Make name."), // on error this message is sent.
 
     body("inv_model")
       .trim()
       .isLength({ min: 3 })
-      .notEmpty()
       .withMessage("Please provide a valid Model name."), // on error this message is sent.
 
-    // valid email is required and cannot already exist in the DB
     body("inv_description")
       .trim()
-      .notEmpty()
+      .isLength({min:3})
       .withMessage("A valid description is required."),
 
     body("inv_price")
       .isNumeric()
-      .notEmpty()
       .withMessage("Please provide a valid price"),
     
     body("inv_year")
-      .isLength({ min: 4, max: 4 })
-      .isNumeric()
-      .notEmpty()
+      .trim()
+      .matches(/^\d{4}$/)
       .withMessage('Please enter a valid year'),
       
     body("inv_miles")
-      .isNumeric()
-      .notEmpty()
+      .trim()
+      .matches(/[0-9]+/)
       .withMessage('Please enter a valid mileage.'),
       
 
     body("inv_color")
       .trim()
-      .isAlpha()
-      .notEmpty()
+      .matches(/[A-Za-z]{3,}/)
       .withMessage('Please enter a valid color.')
   ]
 }

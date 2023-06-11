@@ -150,8 +150,8 @@ invCont.registerNewVehicle = async function(req, res){
       "success",
       `Congratulations, you\'ve registered ${inv_make} ${inv_model}!`
     )
-    res.status(201).render("./inventory/add-vehicle", {
-      title: "Add New Vehicle",
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
       nav,
       dropdown,
       errors: null
@@ -159,7 +159,7 @@ invCont.registerNewVehicle = async function(req, res){
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("/inventory/add-vehicle", {
-      title: "Registration",
+      title: "Register New Vehicle",
       nav,
       dropdown,
       errors: null,

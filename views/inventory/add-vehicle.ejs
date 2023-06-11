@@ -20,16 +20,16 @@
     <div id="center-form-content">
         <label class="required" for="classification_id">Classification</label><br>
         <%- dropdown %> <br>
-        <!-- <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required value=""><br> -->
+        
 
         <label class="required" for="inv_make">Make</label><br>
         <input type="text" id="inv_make" name="inv_make" placeholder="MIN 3 Characters" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_make%>"><br>
 
         <label class="required" for="inv_model">Model</label><br>
-        <input type="text" id="classification_name" name="inv_model" placeholder="MIN 3 Characters" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_model%>"><br>
+        <input type="text" id="inv_model" name="inv_model" placeholder="MIN 3 Characters" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_model%>"><br>
 
         <label class="required" for="inv_description">Description</label> <br>
-        <textarea type="text" id="classification_name" name="inv_description" required value="<%= locals.inv_description%>"></textarea><br>
+        <textarea id="inv_description" name="inv_description" required ></textarea><br>
 
         <label class="required" for="inv_image">Image Path</label><br>
         <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-image.png" required value="<%= locals.inv_image%>"><br>
@@ -38,16 +38,16 @@
         <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required value="<%= locals.inv_thumbnail%>"><br>
 
         <label class="required" for="inv_price">Price</label><br>
-        <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price%>"><br>
+        <input type="text" id="inv_price" pattern="[0-9.]*" name="inv_price" required value="<%= locals.inv_price%>"><br>
 
         <label class="required" for="inv_year">Year</label><br>
         <input type="text" id="inv_year" name="inv_year" minlength="4" maxlength="4" pattern="[0-9]{4}" required value="<%= locals.inv_year%>"><br>
 
         <label class="required" for="inv_miles">Miles</label><br>
-        <input type="year" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles%>"><br>
+        <input type="text" id="inv_miles" name="inv_miles" pattern="[0-9.]*" placeholder="format:no commas" required value="<%= locals.inv_miles%>"><br>
 
         <label class="required" for="inv_color">Color</label><br>
-        <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color%>"><br>
+        <input type="text" id="inv_color" name="inv_color" required pattern="[A-Za-z]{3,}" placeholder="MIN 3 Chaacters" value="<%= locals.inv_color%>"><br>
 
         <input type="submit" value="Add Vehicle" id="register">
     </div>

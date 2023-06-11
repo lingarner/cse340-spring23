@@ -84,7 +84,7 @@ return detailsContainer
 
 Util.classDropdown = async function(data){
   let dpContainer = '<select name="classification_id" id="class-dropdown">'
-  // let ejsLocal = '<%= locals.classification_name %>'
+  dpContainer += '<option value="">Select a Classification</option>'
   for (let i = 0; i < data.length; i++) {
     dpContainer += `<option value="${data[i].classification_id}">${data[i].classification_name}</option>`;
   }

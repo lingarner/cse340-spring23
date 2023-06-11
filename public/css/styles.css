@@ -215,7 +215,7 @@ li :nth-child(1){
 }
 
 form{
-  background-color: #01869E;
+  background-color: #005766;
   width: 50%;
   margin: 0 auto;
   padding: 10px;
@@ -228,7 +228,7 @@ form{
   margin: 0 auto;
   width: 80%;
 }
-label{
+ form label, form p, form a{
   font-size: 17px;
   color: white;
   font-family: 'Hind', sans-serif;
