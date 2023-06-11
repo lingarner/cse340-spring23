@@ -23,10 +23,10 @@
         <!-- <input type="text" id="classification_name" name="classification_name" pattern="[A-Za-z]+" required value=""><br> -->
 
         <label class="required" for="inv_make">Make</label><br>
-        <input type="text" id="inv_make" name="inv_make" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_make%>"><br>
+        <input type="text" id="inv_make" name="inv_make" placeholder="MIN 3 Characters" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_make%>"><br>
 
         <label class="required" for="inv_model">Model</label><br>
-        <input type="text" id="classification_name" name="inv_model" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_model%>"><br>
+        <input type="text" id="classification_name" name="inv_model" placeholder="MIN 3 Characters" pattern="[A-Za-z]{3,}" required value="<%= locals.inv_model%>"><br>
 
         <label class="required" for="inv_description">Description</label> <br>
         <textarea type="text" id="classification_name" name="inv_description" required value="<%= locals.inv_description%>"></textarea><br>

@@ -47,5 +47,93 @@ validate.checkClassData = async (req, res, next) => {
 
 }
 
+/* ******************************
+ * Check New Vehicle Data -- VALIDATE
+ * ***************************** */
+
+validate.newInvRules = () => {
+  return [
+        
+    body("inv_make")
+    .trim() //removes whitespace on either side of incoming string
+    .isLength({ min: 3 })
+    .notEmpty()
+    .withMessage("Please provide a valid Make name."), // on error this message is sent.
+
+    body("inv_model")
+      .trim()
+      .isLength({ min: 3 })
+      .notEmpty()
+      .withMessage("Please provide a valid Model name."), // on error this message is sent.
+
+    // valid email is required and cannot already exist in the DB
+    body("inv_description")
+      .trim()
+      .notEmpty()
+      .withMessage("A valid description is required."),
+
+    body("inv_price")
+      .isNumeric()
+      .notEmpty()
+      .withMessage("Please provide a valid price"),
+    
+    body("inv_year")
+      .isLength({ min: 4, max: 4 })
+      .isNumeric()
+      .notEmpty()
+      .withMessage('Please enter a valid year'),
+      
+    body("inv_miles")
+      .isNumeric()
+      .notEmpty()
+      .withMessage('Please enter a valid mileage.'),
+      
+
+    body("inv_color")
+      .trim()
+      .isAlpha()
+      .notEmpty()
+      .withMessage('Please enter a valid color.')
+  ]
+}
+
+/* ******************************
+ * Check New Vehicle Data -- VALIDATE
+ * ***************************** */
+validate.checkNewInv = async (req, res, next) => {
+  const { 
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+  } = req.body
+
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      const classificationTable = await invModel.getClassifications()
+      let dropdown = await utilities.classDropdown(classificationTable.rows)
+      res.render("inventory/add-vehicle", {
+          errors,
+          title: "Add New Vehicles",
+          dropdown,
+          nav,
+          inv_make,
+          inv_model,
+          inv_description,
+          inv_price,
+          inv_year,
+          inv_miles,
+          inv_color 
+      })
+      return
+  }
+  next()
+
+}
 
 module.exports = validate

@@ -46,7 +46,10 @@ router.post("/newClass",
 );
 
 // send new vehicle to the database
-router.post("/newInv", utilities.handleErrors((invController.registerNewVehicle)))
+router.post("/newInv", 
+regValidateInv.newInvRules(),
+regValidateInv.checkNewInv,
+utilities.handleErrors((invController.registerNewVehicle)))
 
 
 module.exports = router;
