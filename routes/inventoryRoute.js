@@ -33,8 +33,11 @@ router.get("/", utilities.handleErrors((invController.buildInvNav)));
 // Route for error Message
 router.get("/broken", utilities.handleErrors(invController.throwError));
 
-// router for thr table in the management view
+// router for the table in the management view
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// router for the modify of the vehicles in table
+router.get("/edit/:inv_id", utilities.handleErrors(invController.modifyInventory))
 
 /* ******************************
 * POST methods
@@ -52,6 +55,14 @@ router.post("/newInv",
 regValidateInv.newInvRules(),
 regValidateInv.checkNewInv,
 utilities.handleErrors((invController.registerNewVehicle)))
+
+
+// update vehicle information
+router.post(
+    "/update/", 
+    regValidateInv.newInvRules(),
+    regValidateInv.checkUpdateData,
+    utilities.handleErrors((invController.updateInventory)))
 
 
 module.exports = router;
