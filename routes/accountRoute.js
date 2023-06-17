@@ -32,7 +32,14 @@ accRouter.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
-    utilities.handleErrors(accountController.registerLogin),
+    // utilities.handleErrors(accountController.registerLogin),
+    utilities.handleErrors(accountController.accountLogin),
+)
+
+accRouter.get(
+    "/", 
+    utilities.checkLogin,
+    utilities.handleErrors((accountController.buildBaseLogin)) 
 )
 
 module.exports = accRouter;

@@ -55,7 +55,7 @@ async function registerClass(classification_name){
 } 
 
 // * **********************
-//  *   Check for existing Class
+//  *  Check for existing Class
 //  * ********************* */
 async function checkExistingClass(classification_name){
   try {

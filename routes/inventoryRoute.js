@@ -33,6 +33,8 @@ router.get("/", utilities.handleErrors((invController.buildInvNav)));
 // Route for error Message
 router.get("/broken", utilities.handleErrors(invController.throwError));
 
+// router for thr table in the management view
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 /* ******************************
 * POST methods

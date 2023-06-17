@@ -13,4 +13,14 @@
 
     <!-- One to trigger add new inventory view -->
     <h2><a href="/inv/newInv">Add New Vehicle</a></h2>
+
+    <h2>Manage Inventory</h2>
+    <p>Select a classification from the list to see the items belonging to the classification</p>
+    <%- classificationSelect %>
+
+    <table id="inventoryDisplay"></table>
+
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+
+    <script src="../../js/inventory.js"></script>
 </body>
