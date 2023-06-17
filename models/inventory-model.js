@@ -118,8 +118,34 @@ async function updateInventory(
   }
 }
 
+// * **********************
+//  *  Delete Inventory (vehicles) in Db
+//  * ********************* */
+async function deleteInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "DELETE FROM inventory WHERE inv_id = $1"
+    const data = await pool.query(sql, [inv_id])
+    return data
+  } catch (error) {
+    new Error("Deletion Inventory Error")
+  }
+}
+
 //allows the function to be used elsewhere in the code
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, registerClass, checkExistingClass, registerVehicle, updateInventory};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, registerClass, checkExistingClass, registerVehicle, updateInventory, deleteInventory};
 
 
 
