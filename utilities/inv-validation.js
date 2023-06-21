@@ -143,6 +143,7 @@ validate.checkUpdateData = async (req, res, next) => {
     inv_year,
     inv_miles,
     inv_color,
+    inv_id
   } = req.body
 
   let errors = []

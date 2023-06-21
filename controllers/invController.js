@@ -290,7 +290,7 @@ invCont.deleteInventoryCheck = async function(req, res){
   const inv_id = parseInt(req.params.inv_id)
 
   const invData = await invModel.getInventoryByInvId(inv_id)
-  console.log(invData[0])
+
   const itemName = `${invData[0].inv_make} ${invData[0].inv_model}`
   res.render("./inventory/delete-confirm", {
     title: "Delete " + itemName,
@@ -348,7 +348,7 @@ invCont.deleteInventoryForReal = async function(req, res){
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the deletion failed.")
     res.status(501).render("inventory/delete-confirm", {
-    title: "Edit " + itemName,
+    title: "Delete " + itemName,
     nav,
     classificationSelect: classificationSelect,
     errors: null,
