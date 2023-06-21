@@ -53,7 +53,7 @@ validate.checkClassData = async (req, res, next) => {
 
 validate.newInvRules = () => {
   return [
-        
+
     body("inv_make")
     .trim() //removes whitespace on either side of incoming string
     .isLength({ min: 3 })

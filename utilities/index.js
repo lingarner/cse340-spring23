@@ -83,14 +83,16 @@ Util.buildInvDetails = async function(data){
 return detailsContainer
 }
 
-Util.classDropdown = async function(data){
+Util.classDropdown = async function(data, classification_id = null){
   let dpContainer = '<select name="classification_id" id="class-dropdown">'
   dpContainer += '<option value="">Select a Classification</option>'
   for (let i = 0; i < data.length; i++) {
-    dpContainer += `<option value="${data[i].classification_id}" >${data[i].classification_name}</option>`;
+    dpContainer += `<option value="${data[i].classification_id}" 
+    ${classification_id === Number(data[i].classification_id)? 'selected': ''}
+    > 
+    ${data[i].classification_name}</option>`;
   }
   
-
   dpContainer += `</select>`
   return dpContainer
 

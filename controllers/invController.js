@@ -47,12 +47,12 @@ invCont.throwError =  function(req, res, next){
 invCont.buildInvNav = async function(req, res, next){
   let nav = await utilities.getNav()
   const classificationTable = await invModel.getClassifications()
-  const classificationSelect = await utilities.classDropdown(classificationTable.rows)
+  const dropdown = await utilities.classDropdown(classificationTable.rows)
 
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
-    classificationSelect,
+    dropdown,
     errors: null
   })
 };
@@ -120,6 +120,7 @@ invCont.registerClass = async function(req, res){
 invCont.registerNewVehicle = async function(req, res){
   let nav = await utilities.getNav()
 
+  
   const classificationTable = await invModel.getClassifications()
   
   let dropdown = await utilities.classDropdown(classificationTable.rows)
@@ -193,13 +194,14 @@ invCont.getInventoryJSON = async (req, res, next) => {
 invCont.modifyInventory = async function(req, res){
   let nav = await utilities.getNav()
   const inv_id = parseInt(req.params.inv_id)
+  
+  const invData = await invModel.getInventoryByInvId(inv_id)
 
   const classificationTable = await invModel.getClassifications()
-  let classificationSelect = await utilities.classDropdown(classificationTable.rows)
+  let classificationSelect = await utilities.classDropdown(classificationTable.rows, invData[0].classification_id)
 
-  const invData = await invModel.getInventoryByInvId(inv_id)
-  console.log(invData[0])
   const itemName = `${invData[0].inv_make} ${invData[0].inv_model}`
+  
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
@@ -223,8 +225,10 @@ invCont.modifyInventory = async function(req, res){
 invCont.updateInventory = async function(req, res){
   let nav = await utilities.getNav()
 
+  const invData = await invModel.getInventoryByInvId(inv_id)
+
   const classificationTable = await invModel.getClassifications()
-  let classificationSelect = await utilities.classDropdown(classificationTable.rows)
+  let classificationSelect = await utilities.classDropdown(classificationTable.rows, invData[0].classification_id)
 
   const {
     inv_id,
