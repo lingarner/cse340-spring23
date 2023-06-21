@@ -64,8 +64,12 @@ app.set("layout", "./layouts/layout") // not at views root
 // Index route- builds nav
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
-// // build inv
-// app.get("/inv", utilities.handleErrors(invContrroler.buildLayout))
+
+// Route to delete the cookie
+app.get('/clear-cookie', (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+});
 
 
 
