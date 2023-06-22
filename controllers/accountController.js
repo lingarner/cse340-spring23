@@ -143,12 +143,23 @@ async function accountLogin(req, res) {
 
 async function buildBaseLogin(req, res, next){
   let nav = await utilities.getNav()
+
+  const account_type = res.locals.accountData.account_type
     
-  res.render("account/base", {
-    title: "Account Management",
-    nav,
-    errors: null,
-  })
+  if(account_type === 'Employee' || account_type === 'Admin'){
+    res.render("account/elevated", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    })
+    next()
+  } else {
+    res.render("account/base", {
+      title: "Account Management",
+      nav,
+      errors: null,
+    })
+  }
 }
 
 

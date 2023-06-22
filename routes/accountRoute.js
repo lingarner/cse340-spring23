@@ -42,4 +42,7 @@ accRouter.get(
     utilities.handleErrors((accountController.buildBaseLogin)) 
 )
 
+accRouter.get("/updateAccountInfo/:account_id", 
+utilities.handleErrors((accountController.updateAccountInfo)))
+
 module.exports = accRouter;
