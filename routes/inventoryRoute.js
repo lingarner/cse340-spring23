@@ -28,7 +28,10 @@ router.get("/newClass", utilities.handleErrors((invController.buildNewClassifica
 router.get("/newInv", utilities.handleErrors((invController.renderNewVehicle)));
 
 // render home management view
-router.get("/", utilities.handleErrors((invController.buildInvNav)));
+router.get("/", 
+    utilities.checkAccountType,
+    utilities.handleErrors((invController.buildInvNav))
+);
 
 // Route for error Message
 router.get("/broken", utilities.handleErrors(invController.throwError));

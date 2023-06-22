@@ -83,7 +83,11 @@ app.use(require("./routes/static"))
 // Inventory routes- builds nav links
 // any links with /inv will go to inventoryRoute.js to
 // find the rest of the link
-app.use("/inv", require("./routes/inventoryRoute"))
+app.use(
+  "/inv", 
+  require("./routes/inventoryRoute")
+)
+
 
 //route to direct to accountRoute.js to 
 //access login page information
