@@ -15,10 +15,10 @@
    </ul>
 <% }%>
 
-<h2>Welcome <%- locals.accountData.account_firstname %> </h2>
+<h2>Welcome <%- firstname %> </h2>
 
 <h3>Update Account Information</h3>
-<% const url = "/updateAccountInfo/" + locals.accountData.account_id %>
+<% const url = "/account/updateAccountInfo/" +locals.accountData.account_id %>
 <p><a href="<%-url%>">Update Account Information</a></p>
 
 <h3>Inventory Management</h3>

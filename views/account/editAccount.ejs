@@ -1,0 +1,56 @@
+<!-- content heading -->
+<% if (title) { %>
+    <h1 id="centered"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+<% }%>
+
+<!-- will display a flash message if one is sent from controller -->
+<%- messages() %>
+
+<!-- edit account form -->
+<form id="editAccount" action="/account/processUpdateReq" method="post">
+    <div id="center-form-content">
+        
+        <label class="required" for="email">First Name:</label><br>
+        <input type="text" id="email" name="account_firstname" pattern="[A-Za-z]{1,}" placeholder="First Name" value="<%= locals.account_firstname%>" required><br>
+
+        <label class="required" for="email">Last Name:</label><br>
+        <input type="text" id="email" name="account_lastname" minlength="1"  placeholder="Last Name" value="<%= locals.account_lastname%>" required><br>
+
+        <label class="required" for="email">Email:</label><br>
+        <input type="email" id="email" name="account_email"  placeholder="Email Address" value="<%= locals.account_email%>" required><br>        
+        <input id="submit" type="submit" value="Update" method="get">
+
+        <input  type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>
+        >
+    </div>
+</form> 
+
+<!-- edit password form -->
+<h3>Update Password</h3>
+<p>
+    The password must be:
+    12 characters in length, minimum
+    contain at least 1 capital letter
+    contain at least 1 number
+    contain at least 1 special character
+</p><br>
+<p>*note your original password will be changed.</p>
+<form>
+    <label class="required" for="passsword">Password:</label><br> 
+    <input type="password" id="passsword" name="account_password" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br><br>
+    <input id="submit" type="submit" value="Change Password" action="" method="get">
+</form>

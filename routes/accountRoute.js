@@ -42,7 +42,17 @@ accRouter.get(
     utilities.handleErrors((accountController.buildBaseLogin)) 
 )
 
+// path to render the view where users can update their account information
 accRouter.get("/updateAccountInfo/:account_id", 
-utilities.handleErrors((accountController.updateAccountInfo)))
+utilities.handleErrors((accountController.renderUpdateAccount)))
+
+
+// path to render the view where users can update their account information
+accRouter.post("/processUpdateReq/", 
+    regValidate.updateAccRules(),
+    regValidate.checkAccData,
+    utilities.handleErrors((accountController.updateAccount)))
+
+
 
 module.exports = accRouter;

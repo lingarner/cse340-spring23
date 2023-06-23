@@ -193,7 +193,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
 // edit inventory view
 invCont.modifyInventory = async function(req, res){
   let nav = await utilities.getNav()
-  const inv_id = parseInt(req.params.inv_id)
+  const inv_id = parseInt(req.params.inv_id) 
   
   const invData = await invModel.getInventoryByInvId(inv_id)
 

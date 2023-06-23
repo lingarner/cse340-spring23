@@ -145,12 +145,15 @@ async function buildBaseLogin(req, res, next){
   let nav = await utilities.getNav()
 
   const account_type = res.locals.accountData.account_type
+
+  const firstname = res.locals.accountData.account_firstname
     
   if(account_type === 'Employee' || account_type === 'Admin'){
     res.render("account/elevated", {
       title: "Account Management",
       nav,
       errors: null,
+      firstname
     })
     next()
   } else {
@@ -158,9 +161,66 @@ async function buildBaseLogin(req, res, next){
       title: "Account Management",
       nav,
       errors: null,
+      account_firstname
+    })
+  }
+}
+
+// Renders the view for user to update account information
+async function renderUpdateAccount(req, res){
+  let nav = await utilities.getNav()
+
+  const account_id = parseInt(req.params.account_id) 
+  const accountData = await accountModel.getAccountsByAccountId(account_id);
+
+  res.render("account/editAccount", {
+    title: "Edit Account",
+    nav,
+    account_firstname: accountData[0].account_firstname,
+    account_lastname: accountData[0].account_lastname,
+    account_email: accountData[0].account_email,
+    account_id: accountData[0].account_id,
+    errors: null,
+  })
+}
+
+// Renders the view for user to update account information
+async function updateAccount(req, res){
+  let nav = await utilities.getNav()
+ 
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  }  = req.body
+
+
+  const dataResult = await accountModel.updateAccountInfo(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  console.log(dataResult)
+
+  if (dataResult) {
+    req.flash("success", `${account_firstname}'s Account was updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/editAccount", {
+    title: "Edit Account ",
+    nav,
+    errors: null,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
     })
   }
 }
 
 
-module.exports = { buildLogin, buildRegistration, registerAccount, registerLogin, accountLogin, buildBaseLogin }
+module.exports = { buildLogin, buildRegistration, registerAccount, registerLogin, accountLogin, buildBaseLogin, renderUpdateAccount, updateAccount }
