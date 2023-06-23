@@ -155,13 +155,12 @@ async function buildBaseLogin(req, res, next){
       errors: null,
       firstname
     })
-    next()
   } else {
     res.render("account/base", {
       title: "Account Management",
       nav,
       errors: null,
-      account_firstname
+      firstname
     })
   }
 }
@@ -203,11 +202,9 @@ async function updateAccount(req, res){
     account_id
   )
 
-  console.log(dataResult)
-
   if (dataResult) {
     req.flash("success", `${account_firstname}'s Account was updated.`)
-    res.redirect("/account/")
+    res.redirect("/account")
   } else {
     req.flash("notice", "Sorry, the update failed.")
     res.status(501).render("account/editAccount", {
@@ -222,5 +219,45 @@ async function updateAccount(req, res){
   }
 }
 
+// update password
+async function updatePassword(req,res){
+  let nav = await utilities.getNav()
+  const {account_password } = req.body
 
-module.exports = { buildLogin, buildRegistration, registerAccount, registerLogin, accountLogin, buildBaseLogin, renderUpdateAccount, updateAccount }
+  console.log('CHANGE PASS')
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the new password.')
+    res.status(500).render("account/editAccount", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+
+  const regResult = await accountModel.updatePassword(
+    hashedPassword
+  )
+
+  if (regResult) {
+    req.flash(
+      "success",
+      `Password Updated`
+    )
+    res.redirect("/account")
+  } else {
+    req.flash("notice", "Sorry, the registration failed.")
+    res.status(501).render("account/editAccount", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+module.exports = { buildLogin, buildRegistration, registerAccount, registerLogin, accountLogin, buildBaseLogin, renderUpdateAccount, updateAccount, updatePassword }
