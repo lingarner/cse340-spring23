@@ -4,6 +4,7 @@ const accountModel = require("../models/account-model")
 // body tool allows the validator to access the body object (access data)
 // validationResult is an object that contains all errors detected by the validation process (retrieve errors)
 const { body, validationResult } = require("express-validator")
+const cookie = require("cookie-parser")
 const validate = {}
 
 
@@ -176,13 +177,56 @@ validate.checkAccData = async (req, res, next) => {
       account_firstname,
       account_lastname,
       account_email,
-      account_id
+      account_id,
     })
     return
   }
   next()
 
 }
+
+// validate updated password
+validate.newPasswordRules = () => {
+  return [
+          // password is required and must be strong password
+          body("account_password")
+          .trim()
+          .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+          })
+          .withMessage("Password does not meet requirements."),
+  ]
+}
+
+  /* ******************************
+ * Check new password and return errors or continue to registration -- VALIDATE
+ * ***************************** */
+  validate.checkNewPassword = async (req, res, next) => {
+    const { account_password, account_id} = req.body
+    let accountData = await accountModel.getAccountsByAccountId(account_id)
+
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      res.render("account/editAccount", {
+        errors,
+        title: "Edit Account",
+        nav,
+        account_password,
+        account_firstname: accountData[0].account_firstname,
+        account_lastname: accountData[0].account_lastname,
+        account_email: accountData[0].account_email
+      })
+      
+      return
+    }
+    next()
+  }
 
 
 module.exports = validate

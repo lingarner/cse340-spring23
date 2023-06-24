@@ -55,6 +55,8 @@ accRouter.post("/processUpdateReq/",
 
 // path to update password in db
 accRouter.post("/passwordChange",
-utilities.handleErrors((accountController.updatePassword)))
+    regValidate.newPasswordRules(),
+    regValidate.checkNewPassword,
+    utilities.handleErrors((accountController.updatePassword)))
 
 module.exports = accRouter;

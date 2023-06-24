@@ -3,6 +3,7 @@ const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const cookie = require("cookie-parser")
 require("dotenv").config()
 
 /* ****************************************
@@ -119,14 +120,16 @@ async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
-  if (!accountData) {
-   req.flash("notice", "Please check your credentials and try again.")
-   res.status(400).render("account/login", {
-    title: "Login",
-    nav,
-    errors: null,
-    account_email,
-   })
+
+  // check if the old and new password match 
+   if (!accountData || !bcrypt.compareSync(account_password, accountData.account_password)) {
+    req.flash("notice", "Please check your credentials and try again.");
+    res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+      account_email,
+    });
   return
   }
   try {
@@ -220,11 +223,11 @@ async function updateAccount(req, res){
 }
 
 // update password
-async function updatePassword(req,res){
+async function updatePassword(req, res){
   let nav = await utilities.getNav()
-  const {account_password } = req.body
+  const {account_password, account_id } = req.body
 
-  console.log('CHANGE PASS')
+  let accountData = await accountModel.getAccountsByAccountId(account_id)
 
   // Hash the password before storing
   let hashedPassword
@@ -241,7 +244,8 @@ async function updatePassword(req,res){
   }
 
   const regResult = await accountModel.updatePassword(
-    hashedPassword
+    hashedPassword,
+    account_id
   )
 
   if (regResult) {
@@ -251,11 +255,14 @@ async function updatePassword(req,res){
     )
     res.redirect("/account")
   } else {
-    req.flash("notice", "Sorry, the registration failed.")
+    req.flash("notice", "Sorry, the password update failed.")
     res.status(501).render("account/editAccount", {
       title: "Edit Account",
       nav,
       errors: null,
+      account_firstname: accountData[0].account_firstname,
+      account_lastname: accountData[0].account_lastname,
+      account_email: accountData[0].account_email
     })
   }
 }

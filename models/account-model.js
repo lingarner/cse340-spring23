@@ -22,7 +22,6 @@ async function checkExistingEmail(account_email){
   try {
     const sql = "SELECT * FROM account WHERE account_email = $1"
     const email = await pool.query(sql, [account_email])
-    console.log("check exisiting")
     return email.rowCount
   } catch (error) {
     return error.message
@@ -54,7 +53,6 @@ async function getAccountsByAccountId(account_id) {
       "WHERE account_id = $1",
       [account_id]
       )
-      console.log(data.rows)
       return data.rows
   } catch (error) {
     console.error("getAccountsByAccountId error " + error)
@@ -90,11 +88,10 @@ async function updateAccountInfo(
 /* *****************************
 *   Register new password
 * *************************** */
-async function updatePassword(account_password){
+async function updatePassword(account_password, account_id){
   try {
-    const sql = "INSERT INTO account (account_password)" + 
-    "VALUES ($1) RETURNING *"
-    return await pool.query(sql, [account_password])
+    const sql = "UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *"
+    return await pool.query(sql, [account_password, account_id])
   } catch (error) {
     return error.message
   }
