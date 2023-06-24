@@ -197,17 +197,27 @@ async function updateAccount(req, res){
     account_id
   }  = req.body
 
-
+  
   const dataResult = await accountModel.updateAccountInfo(
     account_firstname,
     account_lastname,
     account_email,
     account_id
   )
-
+  
+  const accountData = await accountModel.getAccountsByAccountId(account_id)
+  console.log(accountData[0])
+  
   if (dataResult) {
-    req.flash("success", `${account_firstname}'s Account was updated.`)
-    res.redirect("/account")
+
+    try {
+      const accessToken = jwt.sign(accountData[0], process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+      return req.flash("success", `${account_firstname}'s Account was updated.`), res.redirect("/account/")
+    } catch (error) {
+      return new Error('Access Forbidden')
+    }
+
   } else {
     req.flash("notice", "Sorry, the update failed.")
     res.status(501).render("account/editAccount", {
