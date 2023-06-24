@@ -49,7 +49,7 @@
         <label class="required" for="inv_color">Color</label><br>
         <input type="text" id="inv_color" name="inv_color" required pattern="[A-Za-z]{3,}" placeholder="MIN 3 Chaacters" value="<%= locals.inv_color%>"><br>
 
-        <input disabled type="submit" id="submit" name="submit" value="Update Vehicle">
+        <input disabled type="submit" class="submit" name="submit" value="Update Vehicle">
 
         <input  type="hidden" name="inv_id"
         <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"

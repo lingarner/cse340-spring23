@@ -234,7 +234,7 @@ form{
   font-family: 'Hind', sans-serif;
 }
 
-#submit, #register{
+.submit, #register{
   display: block;
   width: 40%;
   border-radius: 20px;
