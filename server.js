@@ -93,11 +93,16 @@ app.use(
 //access login page information
 app.use("/account", require("./routes/accountRoute"))
 
+//route to direct to message center
+app.use("/message", require("./routes/messageRoute"))
+
 //route to direct to loginRoute.js to
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
+
+
 
 
 /* ***********************

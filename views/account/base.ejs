@@ -20,3 +20,13 @@
 <h3>Update Account Information</h3>
 <% const url = "/account/updateAccountInfo/" + locals.accountData.account_id %>
 <p><a href="<%-url%>">Update Account Information</a></p>
+
+<h3>Message Center</h3>
+<ul>
+    <li>You have <% locals.unreadMessages %> unread messages</li>
+    <li>
+        Go to 
+        <!-- route to the server and then to routes -->
+        <a href="/message/"> Inbox </a> 
+    </li>
+</ul>
