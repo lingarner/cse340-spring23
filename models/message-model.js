@@ -31,4 +31,16 @@ async function getSenderInfo(message_from) {
   }
 }
 
-  module.exports = {getMessageData, getSenderInfo}
+/* *****************************
+* Get all Users for the dropdown menu
+* ***************************** */
+async function getAllFirstnames() {
+  try {
+    const result = await pool.query('SELECT * FROM public.account ORDER BY account_firstname')
+    return result.rows
+  } catch (error) {
+    return new Error(error)
+  }
+}
+
+  module.exports = {getMessageData, getSenderInfo, getAllFirstnames}

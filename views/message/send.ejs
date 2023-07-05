@@ -1,0 +1,37 @@
+<!-- content heading -->
+<% if (title) { %>
+    <h1 id="centered"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+<% }%>
+
+<p>This is an internal messaging system only. Recipiants are limited to three generic account.</p>
+<p>All inputs are required.</p>
+
+<form>
+    <label class="required">To:</label><br>
+    <%- dropdown %><br>
+
+    <label class="required" for="message_subject">Subject:</label><br>
+    <input type="text" id="message_subject" name="message_subject"><br>
+
+    <label class="required" for="message_body">Message:</label><br>
+    <textarea id="message_body" name="message_body"></textarea><br>
+
+    <input type="submit" class="submit" name="submit" value="Send">
+
+    <!-- <input  type="hidden" name="inv_id"
+    <# if(locals.inv_id) { %> value="<#= locals.inv_id %>"
+    <# } %>
+    > -->
+</form>

@@ -187,4 +187,23 @@ Util.buildMessagesList = async function(data){
   return dataTable; 
 };
 
+
+/* ****************************************
+ *  Build firstname dropdown
+ * ************************************ */
+Util.buildMessageDrop = async function(data, account_id = null){
+  let dpContainer = '<select name="account_id" id="class-dropdown">'
+  dpContainer += '<option value="">Select a Recipient</option>'
+  for (let i = 0; i < data.length; i++) {
+    dpContainer += `<option value="${data[i].account_id}" 
+    ${account_id === Number(data[i].account_id)? 'selected': ''}
+    > 
+    ${data[i].account_firstname} ${data[i].account_lastname}</option>`;
+  }
+  
+  dpContainer += `</select>`
+  return dpContainer
+
+}
+
 module.exports = Util

@@ -34,4 +34,23 @@ messCont.buildInbox = async function(req, res, next) {
     })
   }
 
+/* ****************************************
+*  Deliver create a message view
+* *************************************** */
+messCont.buildSentMessage = async function(req, res, next){
+  let nav = await utilities.getNav()
+
+  let names = await messageModel.getAllFirstnames()
+  console.log(names)
+  let dropdown = await utilities.buildMessageDrop(names)
+
+  //indicated where to render the view
+  res.render("message/send", {
+    title: 'New Message',
+    nav,
+    errors: null,
+    dropdown
+  })
+}
+
 module.exports =  messCont 
