@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
 const invModel = require("../models/inventory-model")
+const mesageModel = require("../models/message-model")
 const Util = {}
 
 /* ************************
@@ -153,5 +154,37 @@ Util.checkAccountType = (req, res, next) => {
     res.redirect("/account/login")
   }
 }
+
+
+/* ****************************************
+ *  Build messages recived table
+ * ************************************ */
+Util.buildMessagesList = async function(data){ 
+
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th>Recieved</th><th>Subject</th><th>From</th><th>Read</th></tr>'; 
+  dataTable += '</thead>';
+  
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  
+  // Iterate over all vehicles in the array and put each in a row 
+  for(i = 0; i < data.length; i++) { 
+
+    // get the name of the message sender
+    let senderId = data[i].message_from;
+    let accountData = await mesageModel.getSenderInfo(senderId)
+    
+    dataTable += `<tr>
+    <td>${data[i].message_created}</td>` +
+    `<td><a href="${data[i].message_id}">${data[i].message_subject}</a></td>` +
+    `<td>${accountData[i].account_firstname} </td>` +
+    `<td>${data[i].message_read}</td></tr>`; ; 
+  }
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  return dataTable; 
+};
 
 module.exports = Util

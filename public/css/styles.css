@@ -273,6 +273,44 @@ input:required:invalid, input:focus:invalid {
   border: 2px solid greenyellow;
  }
 
+ tr, td{
+  width: 70%;
+  text-align: center;
+  border: 1px solid white;
+  height: 25px;
+  font-family: 'Hind', sans-serif;
+  border-radius: 7px;
+ }
+
+ td{
+   margin: 10px;
+  width: 60%;
+ }
+
+
+ thead{
+   font-size: 20px;
+   font-weight: 900;
+  }
+  
+ table{
+  background-color:#01869E;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  border-spacing: 7px;
+ }
+
+table a{
+  color: black;
+}
+
+table a:hover{
+  color:white
+}
+
+
+
 
 
 

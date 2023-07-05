@@ -1,6 +1,6 @@
 // Needed resources
 const utilities = require("../utilities/")
-// const accountModel = require("../models/account-model")
+const messageModel = require("../models/message-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const cookie = require("cookie-parser")
@@ -13,6 +13,15 @@ const messCont = {}
 messCont.buildInbox = async function(req, res, next) {
     let nav = await utilities.getNav()
 
+    // get message data to display in table
+    let account_id = res.locals.accountData.account_id
+  
+    let messageData = await messageModel.getMessageData(account_id)
+
+    // display table
+    let messageTable = await utilities.buildMessagesList(messageData)
+
+    // get first and last name from jwt
     let firstname = res.locals.accountData.account_firstname;
     let lastname = res.locals.accountData.account_lastname;
     
@@ -21,6 +30,7 @@ messCont.buildInbox = async function(req, res, next) {
       title: `${firstname} ${lastname} Inbox`,
       nav,
       errors: null,
+      messageTable,
     })
   }
 
