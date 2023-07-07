@@ -18,20 +18,20 @@
 <p>This is an internal messaging system only. Recipiants are limited to three generic account.</p>
 <p>All inputs are required.</p>
 
-<form>
-    <label class="required">To:</label><br>
+<form id="loginForm" action="/message/send" method="post">
+    <label class="required" for="account_id">To:</label><br>
     <%- dropdown %><br>
 
     <label class="required" for="message_subject">Subject:</label><br>
-    <input type="text" id="message_subject" name="message_subject"><br>
+    <input type="text" id="message_subject" name="message_subject" value="<%= locals.message_subject%>" required><br>
 
     <label class="required" for="message_body">Message:</label><br>
-    <textarea id="message_body" name="message_body"></textarea><br>
+    <textarea id="message_body" name="message_body" value="<%= locals.message_body %>" required></textarea><br>
 
     <input type="submit" class="submit" name="submit" value="Send">
 
-    <!-- <input  type="hidden" name="inv_id"
-    <# if(locals.inv_id) { %> value="<#= locals.inv_id %>"
-    <# } %>
-    > -->
+    <input  type="hidden" name="account_id"
+    <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+    <% } %>
+    >
 </form>

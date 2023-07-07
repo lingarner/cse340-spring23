@@ -103,6 +103,7 @@ validate.checkNewInv = async (req, res, next) => {
     inv_year,
     inv_miles,
     inv_color,
+    classification_id
   } = req.body
 
   let errors = []
@@ -110,7 +111,7 @@ validate.checkNewInv = async (req, res, next) => {
   if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
       const classificationTable = await invModel.getClassifications()
-      let dropdown = await utilities.classDropdown(classificationTable.rows)
+      let dropdown = await utilities.classDropdown(classificationTable.rows, parseInt(classification_id))
       res.render("inventory/add-vehicle", {
           errors,
           title: "Add New Vehicles",

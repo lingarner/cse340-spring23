@@ -84,11 +84,12 @@ Util.buildInvDetails = async function(data){
 return detailsContainer
 }
 
-Util.classDropdown = async function(data, classification_id = null){
+Util.classDropdown = async function(data, classification_id){
   let dpContainer = '<select name="classification_id" id="class-dropdown">'
   dpContainer += '<option value="">Select a Classification</option>'
   for (let i = 0; i < data.length; i++) {
-    dpContainer += `<option value="${data[i].classification_id}" 
+    console.log(classification_id)
+    dpContainer += `<option value="${data[i].classification_id}"
     ${classification_id === Number(data[i].classification_id)? 'selected': ''}
     > 
     ${data[i].classification_name}</option>`;
@@ -178,7 +179,7 @@ Util.buildMessagesList = async function(data){
     
     dataTable += `<tr>
     <td>${data[i].message_created}</td>` +
-    `<td><a href="${data[i].message_id}">${data[i].message_subject}</a></td>` +
+    `<td><a href="/message/new-message/${data[i].message_id}">${data[i].message_subject}</a></td>` +
     `<td>${accountData[i].account_firstname} </td>` +
     `<td>${data[i].message_read}</td></tr>`; ; 
   }
@@ -191,8 +192,9 @@ Util.buildMessagesList = async function(data){
 /* ****************************************
  *  Build firstname dropdown
  * ************************************ */
-Util.buildMessageDrop = async function(data, account_id = null){
-  let dpContainer = '<select name="account_id" id="class-dropdown">'
+Util.buildMessageDrop = async function(data, account_id){
+  console.log(account_id)
+  let dpContainer = '<select name="account_id" id="class-dropdown" required>'
   dpContainer += '<option value="">Select a Recipient</option>'
   for (let i = 0; i < data.length; i++) {
     dpContainer += `<option value="${data[i].account_id}" 

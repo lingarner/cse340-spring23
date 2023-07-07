@@ -24,7 +24,6 @@ async function getSenderInfo(message_from) {
     const result = await pool.query(
       'SELECT account_firstname, account_lastname FROM public.account JOIN public.message ON account.account_id = message.message_from WHERE message.message_from = $1;',
       [message_from])
-    console.log(result.rows)
     return result.rows
   } catch (error) {
     return new Error(error)

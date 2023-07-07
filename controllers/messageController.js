@@ -40,8 +40,10 @@ messCont.buildInbox = async function(req, res, next) {
 messCont.buildSentMessage = async function(req, res, next){
   let nav = await utilities.getNav()
 
+  // get account names
   let names = await messageModel.getAllFirstnames()
-  console.log(names)
+
+  // create recipient dropdown
   let dropdown = await utilities.buildMessageDrop(names)
 
   //indicated where to render the view
