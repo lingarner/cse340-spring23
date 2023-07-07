@@ -15,13 +15,15 @@
    </ul>
 <% }%>
 
+<a href="/message/"> < Back to Inbox</a>
+
 <p>This is an internal messaging system only. Recipiants are limited to three generic account.</p>
 <p>All inputs are required.</p>
 
 <form id="loginForm" action="/message/send" method="post">
     <label class="required" for="account_id">To:</label><br>
     <%- dropdown %><br>
-
+ 
     <label class="required" for="message_subject">Subject:</label><br>
     <input type="text" id="message_subject" name="message_subject" value="<%= locals.message_subject%>" required><br>
 

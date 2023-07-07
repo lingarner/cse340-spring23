@@ -42,4 +42,17 @@ async function getAllFirstnames() {
   }
 }
 
-  module.exports = {getMessageData, getSenderInfo, getAllFirstnames}
+
+/* *****************************
+* Send a new message to the database
+* ***************************** */
+async function registerMessage( message_subject, message_body, message_from, message_to ){
+  try {
+    const sql = "INSERT INTO public.message (message_subject, message_body, message_from, message_to)" + 
+    "VALUES ($1, $2, $3, $4 ) RETURNING *"
+    return await pool.query(sql, [message_subject, message_body, message_from, message_to])
+  } catch (error) {
+    return error.message
+  }
+}
+  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage}

@@ -19,7 +19,7 @@ router.get("/new-message", utilities.handleErrors((messageController.buildSentMe
 router.post("/send", 
     validate.messageRules(),
     validate.checkMessage,
-    utilities.handleErrors((messageController.buildSentMessage))
+    utilities.handleErrors((messageController.registerNewMessage))
 )
 
 // BUILD AND RENDER ARCHIVE VIEW

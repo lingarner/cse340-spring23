@@ -176,11 +176,11 @@ Util.buildMessagesList = async function(data){
     // get the name of the message sender
     let senderId = data[i].message_from;
     let accountData = await mesageModel.getSenderInfo(senderId)
-    
+
     dataTable += `<tr>
     <td>${data[i].message_created}</td>` +
     `<td><a href="/message/new-message/${data[i].message_id}">${data[i].message_subject}</a></td>` +
-    `<td>${accountData[i].account_firstname} </td>` +
+    `<td>${accountData[0].account_firstname} </td>` +
     `<td>${data[i].message_read}</td></tr>`; ; 
   }
   dataTable += '</tbody>'; 
@@ -193,7 +193,6 @@ Util.buildMessagesList = async function(data){
  *  Build firstname dropdown
  * ************************************ */
 Util.buildMessageDrop = async function(data, account_id){
-  console.log(account_id)
   let dpContainer = '<select name="account_id" id="class-dropdown" required>'
   dpContainer += '<option value="">Select a Recipient</option>'
   for (let i = 0; i < data.length; i++) {

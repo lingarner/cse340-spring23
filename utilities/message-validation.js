@@ -49,7 +49,7 @@ validate.checkMessage = async (req, res, next) => {
         nav,
         dropdown,
         message_subject,
-        message_body
+        message_body, 
       })
       return
     }
