@@ -110,4 +110,33 @@ messCont.registerNewMessage = async function(req, res){
   }
 }
 
+/* ****************************************
+*  Build View Message
+* *************************************** */
+messCont.buildViewMessage = async function(req, res, next) {
+  let nav = await utilities.getNav()
+
+  // get id of message user wants to view
+  const message_id = req.params.message_id
+  // get messages to person using message id
+  let messageData = await messageModel.getMessageContent(message_id)
+
+  // change message_from to a name
+  let senderName = await messageModel.getSenderInfo(messageData[0].message_from)
+
+
+  console.log(senderName[0])
+  
+  
+  //indicated where to render the view
+  res.render("message/view-message", {
+    title: `${messageData[0].message_subject}`,
+    nav,
+    errors: null,
+    subject: messageData[0].message_subject,
+    from: `${senderName[0].account_firstname} ${senderName[0].account_lastname}`,
+    message: messageData[0].message_body
+  })
+}
+
 module.exports =  messCont 

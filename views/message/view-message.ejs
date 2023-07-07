@@ -1,0 +1,28 @@
+<!-- content heading -->
+<% if (title) { %>
+    <h1 id="centered"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+<% }%>
+
+<div>
+    <h3>Subject:</h3>
+    <p><%- subject %></p>
+
+    <h3>From:</h3>
+    <p><%- from %></p>
+
+    <h3>Message:</h3>
+    <p><%- message %></p>
+</div>
+<a href="/message/">Return to Inbox</a>

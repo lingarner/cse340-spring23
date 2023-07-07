@@ -172,14 +172,14 @@ Util.buildMessagesList = async function(data){
   
   // Iterate over all vehicles in the array and put each in a row 
   for(i = 0; i < data.length; i++) { 
-
+ 
     // get the name of the message sender
     let senderId = data[i].message_from;
     let accountData = await mesageModel.getSenderInfo(senderId)
 
     dataTable += `<tr>
     <td>${data[i].message_created}</td>` +
-    `<td><a href="/message/new-message/${data[i].message_id}">${data[i].message_subject}</a></td>` +
+    `<td><a href="/message/view/${data[i].message_id}">${data[i].message_subject}</a></td>` +
     `<td>${accountData[0].account_firstname} </td>` +
     `<td>${data[i].message_read}</td></tr>`; ; 
   }

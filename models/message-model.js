@@ -31,6 +31,21 @@ async function getSenderInfo(message_from) {
 }
 
 /* *****************************
+* Returns message information using message_id
+* ***************************** */
+async function getMessageContent(message_id) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM public.message WHERE message_id = $1;',
+      [message_id])
+    return result.rows
+  } catch (error) {
+    return new Error(error)
+  }
+}
+
+
+/* *****************************
 * Get all Users for the dropdown menu
 * ***************************** */
 async function getAllFirstnames() {
@@ -55,4 +70,4 @@ async function registerMessage( message_subject, message_body, message_from, mes
     return error.message
   }
 }
-  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage}
+  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent}

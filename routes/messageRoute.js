@@ -15,14 +15,19 @@ router.get("/", utilities.handleErrors((messageController.buildInbox)))
 // BUILD AND RENDER NEW MESSAGE FORM
 router.get("/new-message", utilities.handleErrors((messageController.buildSentMessage)))
 
+// BUILD REPLY VIEW
+router.get('/view/:message_id', utilities.handleErrors((messageController.buildViewMessage)))
+
+// BUILD AND RENDER ARCHIVE VIEW
+router.get("/archive", utilities.handleErrors(messageController.buildArchive))
+
+
+// POST ROUTES
 // SEND NEW MESSAGE 
 router.post("/send", 
     validate.messageRules(),
     validate.checkMessage,
     utilities.handleErrors((messageController.registerNewMessage))
 )
-
-// BUILD AND RENDER ARCHIVE VIEW
-router.get("/archive", utilities.handleErrors(messageController.buildArchive))
 
 module.exports = router;
