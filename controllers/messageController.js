@@ -168,4 +168,57 @@ messCont.buildViewMessage = async function(req, res, next) {
   })
 }
 
+/* ****************************************
+*  Change Messages to Read
+* *************************************** */
+messCont.markRead = async function(req, res, next) {
+  let nav = await utilities.getNav()
+
+  // get id of message user wants to view
+  const message_id = req.params.message_id
+  // get messages to person using message id
+  let messageData = await messageModel.updateToRead(message_id)
+  console.log(messageData)
+
+  // change message_from to a name
+  let senderName = await messageModel.getSenderInfo(messageData.rows[0].message_from)
+  
+  
+  if (messageData) {
+    req.flash(
+      "success",
+      `Message marked as read!`
+    )
+        // get message data to display in table
+        let account_id = res.locals.accountData.account_id
+    
+        let messageData = await messageModel.getMessageData(account_id)
+        // display table
+        let messageTable = await utilities.buildMessagesList(messageData)
+        
+        // get first and last name from jwt
+        let firstname = res.locals.accountData.account_firstname;
+        
+        let lastname = res.locals.accountData.account_lastname;
+
+    res.status(201).render("message/message-center", {
+      title: `${firstname} ${lastname} Inbox`,
+      nav,
+      errors: null,
+      messageTable
+    })
+  } else {
+    req.flash("notice", "Message failed to be marked as read.")
+    res.status(501).render("message/view-message", {
+      title: `${messageData[0].message_subject}`,
+      nav,
+      errors: null,
+      subject: messageData[0].message_subject,
+      from: `${senderName[0].account_firstname} ${senderName[0].account_lastname}`,
+      message: messageData[0].message_body,
+      message_id
+    })
+  }
+}
+
 module.exports =  messCont 

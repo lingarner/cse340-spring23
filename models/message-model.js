@@ -70,4 +70,16 @@ async function registerMessage( message_subject, message_body, message_from, mes
     return error.message
   }
 }
-  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent}
+
+/* *****************************
+* Send a new message to the database
+* ***************************** */
+async function updateToRead( message_id ){
+  try {
+    const sql = "UPDATE public.message SET message_read = true WHERE message_id = $1 RETURNING *"
+    return await pool.query(sql, [message_id])
+  } catch (error) {
+    return error.message
+  }
+}
+  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent, updateToRead}

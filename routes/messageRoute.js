@@ -24,6 +24,7 @@ router.get('/view/:message_id', utilities.handleErrors((messageController.buildV
 // BUILD AND RENDER ARCHIVE VIEW
 router.get("/archive", utilities.handleErrors(messageController.buildArchive))
 
+router.get("/read/:message_id", utilities.handleErrors(messageController.markRead))
 
 // POST ROUTES
 // SEND NEW MESSAGE 
