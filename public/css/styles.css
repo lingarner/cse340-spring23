@@ -314,6 +314,30 @@ table a:hover{
   color:white
 }
 
+#view-message{
+  background-color:#01869E;
+  border-radius: 10px;
+  text-align: left;
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+#view-message h3{
+  text-decoration: underline;
+}
+#view-message div{
+  margin: 15px auto 20px 15px;
+}
+
+#view-message h3, .inline{
+  display: inline;
+}
+
+.block-tags{
+  display: block;
+}
+
 
 
 

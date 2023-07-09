@@ -54,6 +54,34 @@ messCont.buildSentMessage = async function(req, res, next){
   })
 }
 
+/* ****************************************
+*  Deliver Reply to a message view
+* *************************************** */
+messCont.buildReplyMessage = async function(req, res, next){
+  let nav = await utilities.getNav()
+  const message_id = req.params.message_id
+  
+  // get message info
+  let messageDetails = await messageModel.getMessageContent(message_id)
+  console.log(messageDetails[0].message_from)
+  // get account names
+  let names = await messageModel.getAllFirstnames()
+  // create recipient dropdown
+  let dropdown = await utilities.buildMessageDrop(names, messageDetails[0].message_from )
+
+
+  //indicated where to render the view
+  res.render("message/send", {
+    title: 'New Message',
+    nav,
+    errors: null,
+    dropdown,
+    message_subject: `RE: ${messageDetails[0].message_subject}`,
+    message_body: `\n\n\n///////////// PREVIOUS MESSAGE /////////////\n ${messageDetails[0].message_body}`,
+    account_id: messageDetails[0].message_from
+  })
+}
+
 
 /* ****************************************
 *  Add new message to thee database
@@ -135,7 +163,8 @@ messCont.buildViewMessage = async function(req, res, next) {
     errors: null,
     subject: messageData[0].message_subject,
     from: `${senderName[0].account_firstname} ${senderName[0].account_lastname}`,
-    message: messageData[0].message_body
+    message: messageData[0].message_body,
+    message_id
   })
 }
 

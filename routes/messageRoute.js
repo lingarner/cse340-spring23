@@ -15,6 +15,9 @@ router.get("/", utilities.handleErrors((messageController.buildInbox)))
 // BUILD AND RENDER NEW MESSAGE FORM
 router.get("/new-message", utilities.handleErrors((messageController.buildSentMessage)))
 
+// BUILD AND RENDER NEW MESSAGE FORM
+router.get("/reply/:message_id", utilities.handleErrors((messageController.buildReplyMessage)))
+
 // BUILD REPLY VIEW
 router.get('/view/:message_id', utilities.handleErrors((messageController.buildViewMessage)))
 

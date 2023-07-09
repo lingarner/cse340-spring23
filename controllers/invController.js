@@ -205,7 +205,7 @@ invCont.modifyInventory = async function(req, res){
     title: "Edit " + itemName,
     nav,
     classificationSelect: classificationSelect,
-    errors: null,
+    errors: null, 
     inv_id: invData[0].inv_id,
     inv_make: invData[0].inv_make,
     inv_model: invData[0].inv_model,
