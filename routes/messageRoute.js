@@ -15,18 +15,19 @@ router.get("/", utilities.handleErrors((messageController.buildInbox)))
 // BUILD AND RENDER NEW MESSAGE FORM
 router.get("/new-message", utilities.handleErrors((messageController.buildSentMessage)))
 
-// BUILD AND RENDER NEW MESSAGE FORM
+// BUILD AND RENDER NEW MESSAGE FORM AS A REPLY
 router.get("/reply/:message_id", utilities.handleErrors((messageController.buildReplyMessage)))
 
 // BUILD REPLY VIEW
 router.get('/view/:message_id', utilities.handleErrors((messageController.buildViewMessage)))
 
 // BUILD AND RENDER ARCHIVE VIEW
-router.get("/archive", utilities.handleErrors(messageController.buildArchive))
+router.get("/delete/:message_id", utilities.handleErrors(messageController.deleteMessage))
 
+// MARK A MESSAGE AS READ
 router.get("/read/:message_id", utilities.handleErrors(messageController.markRead))
 
-// POST ROUTES
+///////////////////////// POST ROUTES /////////////////////////////
 // SEND NEW MESSAGE 
 router.post("/send", 
     validate.messageRules(),

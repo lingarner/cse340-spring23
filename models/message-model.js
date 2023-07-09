@@ -82,4 +82,17 @@ async function updateToRead( message_id ){
     return error.message
   }
 }
-  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent, updateToRead}
+
+/* *****************************
+* Deletee message from the database
+* ***************************** */
+async function deleteMessage( message_id ){
+  try {
+    const sql = "DELETE FROM public.message WHERE message_id = $1 RETURNING *"
+    return await pool.query(sql, [message_id])
+  } catch (error) {
+    return error.message
+  }
+}
+
+  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent, updateToRead, deleteMessage}
