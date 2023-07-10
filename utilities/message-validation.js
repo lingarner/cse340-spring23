@@ -36,7 +36,7 @@ validate.checkMessage = async (req, res, next) => {
     const { message_subject, message_body, account_id } = req.body
     let errors = []
 
-
+  console.log(account_id)
     errors = validationResult(req)
 
     if (!errors.isEmpty()) {
@@ -45,7 +45,7 @@ validate.checkMessage = async (req, res, next) => {
       // dropdown menu 
       let names = await messageModel.getAllFirstnames()
       // create recipient dropdown
-      let dropdown = await utilities.buildMessageDrop(names, parseInt(account_id[0]))
+      let dropdown = await utilities.buildMessageDrop(names, account_id)
       
       res.render("message/send", {
         errors,

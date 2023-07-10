@@ -107,7 +107,7 @@ messCont.registerNewMessage = async function(req, res){
   let {account_id} = req.body
  
   let message_from = res.locals.accountData.account_id
-  account_id = parseInt(account_id[0])
+  // account_id = parseInt(account_id[0])
 
   const regResult = await messageModel.registerMessage(
     message_subject, 
