@@ -21,11 +21,17 @@ router.get("/reply/:message_id", utilities.handleErrors((messageController.build
 // BUILD REPLY VIEW
 router.get('/view/:message_id', utilities.handleErrors((messageController.buildViewMessage)))
 
-// BUILD AND RENDER ARCHIVE VIEW
+// DELETE MESSAGE ROUTE
 router.get("/delete/:message_id", utilities.handleErrors(messageController.deleteMessage))
 
 // MARK A MESSAGE AS READ
 router.get("/read/:message_id", utilities.handleErrors(messageController.markRead))
+
+// MARK A MESSAGE AS READ
+router.get("/archive/:message_id", utilities.handleErrors(messageController.sendToArchive))
+
+// BUILD AND RENDER ARCHIVE VIEW
+router.get("/archive", utilities.handleErrors(messageController.buildArchive))
 
 ///////////////////////// POST ROUTES /////////////////////////////
 // SEND NEW MESSAGE 

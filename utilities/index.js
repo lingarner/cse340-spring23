@@ -172,16 +172,22 @@ Util.buildMessagesList = async function(data){
   
   // Iterate over all vehicles in the array and put each in a row 
   for(i = 0; i < data.length; i++) { 
- 
-    // get the name of the message sender
-    let senderId = data[i].message_from;
-    let accountData = await mesageModel.getSenderInfo(senderId)
 
-    dataTable += `<tr>
-    <td>${data[i].message_created}</td>` +
-    `<td><a href="/message/view/${data[i].message_id}">${data[i].message_subject}</a></td>` +
-    `<td>${accountData[0].account_firstname} </td>` +
-    `<td>${data[i].message_read}</td></tr>`; ; 
+    // don't render any messages that are archived
+    if(data[i].message_archived != true){
+      // get the name of the message sender
+      let senderId = data[i].message_from;
+      let accountData = await mesageModel.getSenderInfo(senderId)
+
+      dataTable += `<tr>
+      <td>${data[i].message_created}</td>` +
+      `<td><a href="/message/view/${data[i].message_id}">${data[i].message_subject}</a></td>` +
+      `<td>${accountData[0].account_firstname} </td>` +
+      `<td>${data[i].message_read}</td></tr>`; 
+    } else{
+      continue
+    }
+    
   }
   dataTable += '</tbody>'; 
   // Display the contents in the Inventory Management view 
@@ -206,5 +212,39 @@ Util.buildMessageDrop = async function(data, account_id){
   return dpContainer
 
 }
+
+/* ****************************************
+ *  Build Archives table
+ * ************************************ */
+Util.buildArchiveTable = async function(data){ 
+
+  // Set up the table labels 
+  let dataTable = '<thead>'; 
+  dataTable += '<tr><th>Recieved</th><th>Subject</th><th>From</th><th>Read</th></tr>'; 
+  dataTable += '</thead>';
+  
+  // Set up the table body 
+  dataTable += '<tbody>'; 
+  
+  // Iterate over all vehicles in the array and put each in a row 
+  for(i = 0; i < data.length; i++) { 
+    if(data[i].message_archived == true){
+      // get the name of the message sender
+      let senderId = data[i].message_from;
+      let accountData = await mesageModel.getSenderInfo(senderId)
+  
+      dataTable += `<tr>
+      <td>${data[i].message_created}</td>` +
+      `<td><a href="/message/view/${data[i].message_id}">${data[i].message_subject}</a></td>` +
+      `<td>${accountData[0].account_firstname} </td>` +
+      `<td>${data[i].message_read}</td></tr>`; ; 
+    } else {
+      continue
+    }
+  }
+  dataTable += '</tbody>'; 
+  // Display the contents in the Inventory Management view 
+  return dataTable; 
+};
 
 module.exports = Util

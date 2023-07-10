@@ -95,4 +95,16 @@ async function deleteMessage( message_id ){
   }
 }
 
-  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent, updateToRead, deleteMessage}
+/* *****************************
+* Send messages to Archive
+* ***************************** */
+async function sendToArchive( message_id ){
+  try {
+    const sql = "UPDATE public.message SET message_archived = true WHERE message_id = $1 RETURNING *"
+    return await pool.query(sql, [message_id])
+  } catch (error) {
+    return error.message
+  }
+}
+
+  module.exports = {getMessageData, getSenderInfo, getAllFirstnames, registerMessage, getMessageContent, updateToRead, deleteMessage, sendToArchive}
