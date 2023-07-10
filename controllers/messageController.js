@@ -94,7 +94,6 @@ messCont.buildReplyMessage = async function(req, res, next){
 messCont.registerNewMessage = async function(req, res){
   let nav = await utilities.getNav()
 
-
   // get account names
   let names = await messageModel.getAllFirstnames()
 
@@ -108,9 +107,7 @@ messCont.registerNewMessage = async function(req, res){
   let {account_id} = req.body
  
   let message_from = res.locals.accountData.account_id
-  console.log(message_from)
   account_id = parseInt(account_id[0])
-  console.log(account_id)
 
   const regResult = await messageModel.registerMessage(
     message_subject, 

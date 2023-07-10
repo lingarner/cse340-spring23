@@ -10,7 +10,7 @@ const router = new express.Router()
 const messageController = require("../controllers/messageController")
 
 //BUILD AND RENDER THE MESSAGE CENTER
-router.get("/", utilities.handleErrors((messageController.buildInbox)))
+router.get("/", utilities.checkLogin, utilities.handleErrors((messageController.buildInbox)))
 
 // BUILD AND RENDER NEW MESSAGE FORM
 router.get("/new-message", utilities.handleErrors((messageController.buildSentMessage)))
