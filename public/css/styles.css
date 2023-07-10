@@ -228,6 +228,12 @@ textarea{
   height: 200px;
 }
 
+li .links {
+  color: #551B8B;
+  text-decoration: underline;
+}
+
+
 #center-form-content{
   text-align: left;
   margin: 0 auto;
