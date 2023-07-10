@@ -13,6 +13,10 @@ const validate = {}
  * ********************************* */
 validate.messageRules = () => {
     return [
+        body("account_id")
+        .notEmpty()
+        .withMessage("Please select an option from the dropdown."),
+
         body("message_subject")
             .trim() //removes whitespace on either side of incoming string
             .isLength({ min: 1 })
