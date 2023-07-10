@@ -18,6 +18,9 @@ messCont.buildInbox = async function(req, res, next) {
     let messageData = await messageModel.getMessageData(account_id)
     // display table
     let messageTable = await utilities.buildMessagesList(messageData)
+
+    //get the number of archived messages
+    let archivedTotal = await utilities.getArchTotal(messageData)
     
     // get first and last name from jwt
     let firstname = res.locals.accountData.account_firstname;
@@ -30,6 +33,7 @@ messCont.buildInbox = async function(req, res, next) {
       nav,
       errors: null,
       messageTable,
+      archivedTotal
     })
   }
 
@@ -197,6 +201,8 @@ messCont.markRead = async function(req, res, next) {
         let messageData = await messageModel.getMessageData(account_id)
         // display table
         let messageTable = await utilities.buildMessagesList(messageData)
+        //get the number of archived messages
+        let archivedTotal = await utilities.getArchTotal(messageData)
         
         // get first and last name from jwt
         let firstname = res.locals.accountData.account_firstname;
@@ -207,7 +213,8 @@ messCont.markRead = async function(req, res, next) {
       title: `${firstname} ${lastname} Inbox`,
       nav,
       errors: null,
-      messageTable
+      messageTable,
+      archivedTotal
     })
   } else {
     req.flash("notice", "Message failed to be marked as read.")
@@ -248,6 +255,8 @@ messCont.deleteMessage = async function(req, res, next) {
         let messageData = await messageModel.getMessageData(account_id)
         // display table
         let messageTable = await utilities.buildMessagesList(messageData)
+
+        let archivedTotal = await utilities.getArchTotal(messageData)
         
         // get first and last name from jwt
         let firstname = res.locals.accountData.account_firstname;
@@ -258,7 +267,8 @@ messCont.deleteMessage = async function(req, res, next) {
       title: `${firstname} ${lastname} Inbox`,
       nav,
       errors: null,
-      messageTable
+      messageTable,
+      archivedTotal
     })
   } else {
     req.flash("notice", "Message failed to delete.")
@@ -331,6 +341,8 @@ messCont.sendToArchive = async function(req, res, next) {
         let messageData = await messageModel.getMessageData(account_id)
         // display table
         let messageTable = await utilities.buildMessagesList(messageData)
+
+        let archivedTotal = await utilities.getArchTotal(messageData)
         
         // get first and last name from jwt
         let firstname = res.locals.accountData.account_firstname;
@@ -341,7 +353,8 @@ messCont.sendToArchive = async function(req, res, next) {
       title: `${firstname} ${lastname} Inbox`,
       nav,
       errors: null,
-      messageTable
+      messageTable,
+      archivedTotal
     })
   } else {
     req.flash("notice", "Message failed to be seent to archive.")

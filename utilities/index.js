@@ -187,11 +187,29 @@ Util.buildMessagesList = async function(data){
     } else{
       continue
     }
-    
+
   }
   dataTable += '</tbody>'; 
   // Display the contents in the Inventory Management view 
   return dataTable; 
+};
+
+/* ****************************************
+ *  Get number of Archived Messages
+ * ************************************ */
+Util.getArchTotal = async function(data){ 
+  
+  let archivedTotal = 0
+  // Iterate over all vehicles in the array and put each in a row 
+  for(i = 0; i < data.length; i++) { 
+    // don't render any messages that are archived
+    if(data[i].message_archived == true){
+      archivedTotal += 1
+    } else {
+      continue
+    }
+  }
+  return archivedTotal;
 };
 
 
