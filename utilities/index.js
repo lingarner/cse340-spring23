@@ -212,6 +212,24 @@ Util.getArchTotal = async function(data){
   return archivedTotal;
 };
 
+/* ****************************************
+ *  Get number of Unread Messages
+ * ************************************ */
+Util.getUnreadTotal = async function(data){ 
+  
+  let unreadTotal = 0
+  // Iterate over all vehicles in the array and put each in a row 
+  for(i = 0; i < data.length; i++) { 
+    // don't render any messages that are archived
+    if(data[i].message_read == false){
+      unreadTotal += 1
+    } else {
+      continue
+    }
+  }
+  return unreadTotal;
+};
+
 
 /* ****************************************
  *  Build firstname dropdown

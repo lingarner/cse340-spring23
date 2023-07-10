@@ -1,6 +1,7 @@
 // Needed resources
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
+const messageModel = require("../models/message-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const cookie = require("cookie-parser")
@@ -150,20 +151,29 @@ async function buildBaseLogin(req, res, next){
   const account_type = res.locals.accountData.account_type
 
   const firstname = res.locals.accountData.account_firstname
+
+  // get data for number of unread messages
+  let account_id = res.locals.accountData.account_id
+  let messageData = await messageModel.getMessageData(account_id)
+  //get the number of archived messages
+  let unreadMessages = await utilities.getUnreadTotal(messageData)
+  console.log(unreadMessages)
     
   if(account_type === 'Employee' || account_type === 'Admin'){
     res.render("account/elevated", {
       title: "Account Management",
       nav,
       errors: null,
-      firstname
+      firstname, 
+      unreadMessages
     })
   } else {
     res.render("account/base", {
       title: "Account Management",
       nav,
       errors: null,
-      firstname
+      firstname, 
+      unreadMessages
     })
   }
 }
